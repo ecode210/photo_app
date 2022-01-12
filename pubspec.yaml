@@ -15,6 +15,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   bouncing_widget: ^2.0.0
   google_fonts: ^2.2.0
+  font_awesome_flutter: ^9.2.0
+  url_launcher: ^6.0.18
+  provider: ^6.0.2
+  image_picker: ^0.8.4+4
 
 dev_dependencies:
   flutter_test:
