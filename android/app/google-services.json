@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "703093060590",
+    "project_id": "nft-photo-app",
+    "storage_bucket": "nft-photo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703093060590:android:3525145dc17c5ac09294ff",
+        "android_client_info": {
+          "package_name": "com.example.photo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703093060590-11v87tokmd9ekqu5srv1fnjha8dqlvne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.photo_app",
+            "certificate_hash": "c5edbb5542599520a353c1e13d707194de9fc2f6"
+          }
+        },
+        {
+          "client_id": "703093060590-a4fmvhq3dsqd43oib9e4h630jiqa4rve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcIx-W_WIaKTneK-3nNNDpeGWQ29eYs6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703093060590-a4fmvhq3dsqd43oib9e4h630jiqa4rve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

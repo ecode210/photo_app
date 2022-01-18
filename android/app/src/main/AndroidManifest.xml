@@ -24,6 +24,10 @@
         </intent>
     </queries>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
    <application
         android:label="photo_app"
         android:icon="@mipmap/ic_launcher">
