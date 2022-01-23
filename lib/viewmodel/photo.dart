@@ -46,4 +46,9 @@ class Photo extends ChangeNotifier {
     await googleSignIn.disconnect();
     FirebaseAuth.instance.signOut();
   }
+
+  Future submitFile() async {
+    if (image == null) return;
+    final destination = "images/${user!.id}.${DateTime.now()}";
+  }
 }

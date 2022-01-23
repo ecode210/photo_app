@@ -24,30 +24,123 @@ class _HomeState extends State<Home> {
     var photo = Provider.of<Photo>(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "NFT Photo App",
-          style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-              color: Colors.teal,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
+      appBar: PreferredSize(
+        preferredSize: Size(size.width, 60),
+        child: SafeArea(
+          child: Container(
+            width: size.width,
+            height: 60,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(
+                  height: 60,
+                  width: 60,
+                ),
+                Text(
+                  "NFT Photo App",
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      color: Colors.teal,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                BouncingWidget(
+                  onPressed: () {
+                    Provider.of<Photo>(context, listen: false).googleLogout();
+                    Timer(const Duration(milliseconds: 500), () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
+                      );
+                    });
+                  },
+                  scaleFactor: 0.2,
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.power_settings_new_rounded,
+                      color: Colors.teal,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-        elevation: 0,
-        centerTitle: true,
       ),
       body: Container(
         height: size.height,
         width: size.width,
         color: Colors.white,
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           children: [
+            Container(
+              height: 90,
+              width: size.width * 0.9,
+              decoration: BoxDecoration(
+                color: Colors.teal.shade100,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Hello ${Provider.of<Photo>(context, listen: false).user!.displayName!.split(" ")[0]}",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            color: Colors.teal,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            height: 1,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        Provider.of<Photo>(context, listen: false).user!.email,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            color: Colors.teal,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.teal,
+                    radius: 32,
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          Provider.of<Photo>(context, listen: false)
+                              .user!
+                              .photoUrl!),
+                      radius: 30,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
             InkWell(
               onTap: () {
                 showModalBottomSheet(
@@ -159,8 +252,8 @@ class _HomeState extends State<Home> {
                 alignment: Alignment.center,
                 children: [
                   Container(
-                    height: size.width,
-                    width: size.width,
+                    height: size.width * 0.9,
+                    width: size.width * 0.9,
                     decoration: BoxDecoration(
                       color: Colors.teal,
                       borderRadius: BorderRadius.circular(20),
@@ -178,7 +271,7 @@ class _HomeState extends State<Home> {
                         : null,
                   ),
                   Positioned(
-                    top: size.width * 0.4,
+                    top: size.width * 0.31,
                     child: const Icon(
                       Icons.camera_alt_rounded,
                       color: Colors.white,
@@ -186,7 +279,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Positioned(
-                    top: size.width * 0.6,
+                    top: size.width * 0.51,
                     child: Text(
                       "Take Photo",
                       style: GoogleFonts.poppins(
@@ -201,9 +294,9 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Container(
-              width: size.width,
+              width: size.width * 0.9,
               height: 50,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -233,17 +326,31 @@ class _HomeState extends State<Home> {
                       )),
                     ),
                   ),
-                  const Expanded(child: SizedBox()),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "#${Provider.of<Photo>(context, listen: false).user!.id.substring(5, 15)}.${DateTime.now().millisecondsSinceEpoch}",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             BouncingWidget(
               onPressed: () {},
               scaleFactor: 0.2,
               child: Container(
                 height: 50,
-                width: size.width,
+                width: size.width * 0.9,
                 decoration: BoxDecoration(
                   color: Colors.teal,
                   borderRadius: BorderRadius.circular(10),
@@ -261,7 +368,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             BouncingWidget(
               onPressed: () {
                 showDialog(
@@ -370,23 +477,15 @@ class _HomeState extends State<Home> {
               },
               scaleFactor: 0.2,
               child: Container(
-                height: 50,
-                width: size.width,
+                height: 100,
+                width: size.width * 0.9,
                 decoration: BoxDecoration(
                   color: Colors.teal,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.call,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
                     Text(
                       "Contact Developer",
                       style: GoogleFonts.poppins(
@@ -397,41 +496,27 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
+                    Text(
+                      "Cal Tiger",
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "+1.727.565.8954",
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                   ],
-                ),
-              ),
-            ),
-            const Spacer(),
-            BouncingWidget(
-              onPressed: () {
-                Provider.of<Photo>(context, listen: false).googleLogout();
-                Timer(const Duration(milliseconds: 500), () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Login(),
-                    ),
-                  );
-                });
-              },
-              scaleFactor: 0.2,
-              child: Container(
-                height: 50,
-                width: size.width,
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  "Logout",
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
                 ),
               ),
             ),

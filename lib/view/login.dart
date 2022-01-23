@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
                   slideIndicator: CircularSlideIndicator(
                     currentIndicatorColor: Colors.teal,
                     indicatorBackgroundColor: Colors.grey.shade200,
-                    padding: const EdgeInsets.only(top: 500),
+                    padding: EdgeInsets.only(top: size.height * 0.63),
                   ),
                   scrollPhysics: const BouncingScrollPhysics(),
                   slideTransform: const DefaultTransform(),
